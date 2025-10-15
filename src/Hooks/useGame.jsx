@@ -36,7 +36,7 @@ function reducer(state, action) {
       }
       const newScore = state.score + res.gainedScore;
       const bestScore = Math.max(state.bestScore, newScore);
-      const status = newBoard.flat().includes(1024) ? 'won' : (hasMoves(newBoard) ? 'playing' : 'lost');
+      const status = newBoard.flat().includes(512) ? 'won' : (hasMoves(newBoard) ? 'playing' : 'lost');
       localStorage.setItem('best2048', String(bestScore));
       return { ...state, board: newBoard, score: newScore, bestScore, status, lastSpawn };
     }
