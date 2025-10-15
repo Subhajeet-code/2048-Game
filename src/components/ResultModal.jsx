@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react';
 
 export default function ResultModal({ status, onRestart, onContinue, onClose }) {
-  // status: 'won' | 'lost' or null
   const open = status === 'won' || status === 'lost';
   useEffect(() => {
     if (!open) return;
-    // optional: trap focus or disable page scroll
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     return () => { document.body.style.overflow = prevOverflow; };

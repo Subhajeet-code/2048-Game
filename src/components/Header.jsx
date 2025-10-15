@@ -1,27 +1,34 @@
-import React from 'react';
-import { HelpCircle, Github } from 'lucide-react';
+import React from "react";
+import { Info, RotateCcw } from "lucide-react";
 
 export default function Header({ onOpenHelp, onReset, onShare }) {
   return (
-    <header className="flex items-start justify-between gap-4">
+    <header className="flex items-start justify-between gap-4 mb-6">
       <div className="flex items-center gap-3">
-        <div className="text-2xl font-extrabold text-textSoft">2048</div>
-        <div className="text-sm text-textSoft/80">React · Tailwind</div>
-      </div>
-
-      <div className="flex items-center gap-2">
         <button
           onClick={onOpenHelp}
-          className="p-2 rounded-md bg-white/90 shadow hover:bg-white"
+          className="relative p-3 rounded-xl bg-white/20 backdrop-blur-xl border border-white/20 shadow-lg scale-105 transition-all duration-300"
           title="How to play"
         >
-          <HelpCircle size={18} />
+          <Info
+            size={20}
+            className="text-purple-500 drop-shadow-[0_0_6px_rgba(168,85,247,0.6)] transition-colors"
+          />
+          <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-400/20 via-pink-400/20 to-blue-400/20 pointer-events-none"></div>
         </button>
+
         <button
           onClick={onReset}
-          className="px-3 py-2 rounded-md bg-accent text-white text-sm font-medium shadow hover:brightness-95"
+          className="group relative px-5 py-3 rounded-xl bg-gradient-to-r from-orange-500 to-pink-500 text-white font-semibold shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 overflow-hidden"
         >
-          Restart
+          <span className="relative z-10 flex items-center gap-2">
+            <RotateCcw
+              size={18}
+              className="group-hover:rotate-180 transition-transform duration-500"
+            />
+            Restart
+          </span>
+          <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         </button>
       </div>
     </header>

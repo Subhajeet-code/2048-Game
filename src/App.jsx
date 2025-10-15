@@ -5,7 +5,7 @@ import Scoreboard from "./components/Scoreboard";
 import Controls from "./components/Controls";
 import GameBoard from "./components/Gameboard";
 import HelpModal from "./components/HelpModal";
-import ResultModal from './components/ResultModal';
+import ResultModal from "./components/ResultModal";
 
 export default function App() {
   const { state, dispatch } = useGame(4);
@@ -39,40 +39,65 @@ export default function App() {
   }, [handleKey]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6">
-      <div className="w-full max-w-3xl">
-        <div >
-          <div className="flex items-center justify-between mb-4">
-            <Header
-              onOpenHelp={() => setHelpOpen(true)}
-              onReset={() => dispatch({ type: "RESTART" })}
-            />
-            <Scoreboard score={state.score} best={state.bestScore} />
-          </div>
+    <div
+      className="min-h-screen flex items-center justify-center p-6 relative overflow-hidden"
+      style={{
+        background: "radial-gradient(circle at top, #1b1f33 0%, #0e101a 100%)",
+      }}
+    >
+      <div
+        className="absolute inset-0 pointer-events-none opacity-30"
+        style={{
+          background:
+            "radial-gradient(circle at 20% 20%, rgba(6,182,212,0.3), transparent 40%), radial-gradient(circle at 80% 80%, rgba(164,94,255,0.25), transparent 40%)",
+        }}
+      />
 
-          <div className="flex items-center justify-between mb-4">
-            <Controls
-              onSizeChange={(s) => dispatch({ type: "SET_SIZE", size: s })}
-            />
-            <div className="text-sm text-textSoft/80">Use arrows or WASD</div>
-          </div>
+      <div className="w-full max-w-3xl relative z-10 text-center text-white">
+        <h1
+          className="text-5xl font-extrabold mb-6 tracking-wide"
+          style={{
+            color: "#06b6d4",
+            textShadow:
+              "0 0 15px rgba(6,182,212,0.7), 0 0 30px rgba(6,182,212,0.4)",
+            letterSpacing: "1px",
+          }}
+        >
+          2K48 <span style={{ color: "#a5b4fc" }}>Game</span>
+        </h1>
 
-          <div className="flex justify-center">
-            <GameBoard board={state.board} lastSpawn={state.lastSpawn} />
-          </div>
+        <div className="flex items-center justify-between mb-5 px-2">
+          <Header
+            onOpenHelp={() => setHelpOpen(true)}
+            onReset={() => dispatch({ type: "RESTART" })}
+          />
+          <Scoreboard score={state.score} best={state.bestScore} />
+        </div>
 
-          <div className="mt-4 text-center">
-            <ResultModal
-              status={state.status}
-              onRestart={() => dispatch({ type: "RESTART" })}
-              onContinue={() => {
-                dispatch({ type: "SET_SIZE", size: state.size });
-              }}
-              onClose={() => {
-                dispatch({ type: "SET_SIZE", size: state.size });
-              }}
-            />
+        <div className="flex items-center justify-between mb-6 px-2 text-textSoft/90">
+          <Controls
+            onSizeChange={(s) => dispatch({ type: "SET_SIZE", size: s })}
+          />
+          <div className="text-xs italic text-cyan-300/100">
+            Use ↑ ↓ ← → or WASD keys
           </div>
+        </div>
+
+        <div className="flex justify-center">
+          <GameBoard board={state.board} lastSpawn={state.lastSpawn} />
+        </div>
+
+        <div className="mt-6 text-center">
+          <ResultModal
+            status={state.status}
+            onRestart={() => dispatch({ type: "RESTART" })}
+            onContinue={() => {
+              dispatch({ type: "SET_SIZE", size: state.size });
+            }}
+            onClose={() => {
+              dispatch({ type: "SET_SIZE", size: state.size });
+            }}
+          />
         </div>
       </div>
 
