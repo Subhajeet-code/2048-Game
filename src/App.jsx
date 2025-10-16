@@ -11,6 +11,15 @@ export default function App() {
   const { state, dispatch } = useGame(4);
   const [helpOpen, setHelpOpen] = useState(true);
 
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  useEffect(() => {
+    const touch =
+      "ontouchstart" in window ||
+      navigator.maxTouchPoints > 0 ||
+      navigator.msMaxTouchPoints > 0;
+    setIsTouchDevice(touch);
+  }, []);
   const handleKey = useCallback(
     (e) => {
       if (state.status !== "playing") return;
@@ -29,6 +38,14 @@ export default function App() {
         e.preventDefault();
         dispatch({ type: "MOVE", direction: dir });
       }
+    },
+    [dispatch, state.status]
+  );
+
+  const handleMove = useCallback(
+    (direction) => {
+      if (state.status !== "playing") return;
+      dispatch({ type: "MOVE", direction });
     },
     [dispatch, state.status]
   );
@@ -55,7 +72,7 @@ export default function App() {
 
       <div className="w-full max-w-3xl relative z-10 text-center text-white">
         <h1
-         className="text-3xl sm:text-5xl font-extrabold mb-4 sm:mb-6 tracking-wide"
+          className="text-3xl sm:text-5xl font-extrabold mb-4 sm:mb-6 tracking-wide"
           style={{
             color: "#06b6d4",
             textShadow:
@@ -74,20 +91,29 @@ export default function App() {
           <Scoreboard score={state.score} best={state.bestScore} />
         </div>
 
-         <div className="flex flex-col sm:flex-row items-center justify-between mb-5 sm:mb-6 px-2 text-textSoft/90 gap-2">
+        <div className="flex flex-col sm:flex-row items-center justify-between mb-5 sm:mb-6 px-2 text-textSoft/90 gap-2">
           <Controls
             onSizeChange={(s) => dispatch({ type: "SET_SIZE", size: s })}
           />
-            <div className="text-xs sm:text-sm italic text-cyan-300/90 mt-1 sm:mt-0">
+          {/* <div className="text-xs sm:text-sm italic text-cyan-300/90 mt-1 sm:mt-0">
             Use ↑ ↓ ← → or WASD keys
+          </div> */}
+          <div className="text-xs sm:text-sm italic text-cyan-300/90 mt-1 sm:mt-0">
+            {isTouchDevice
+              ? "Swipe in any direction to move tiles"
+              : "Use ↑ ↓ ← → or WASD keys"}
           </div>
         </div>
 
         <div className="flex justify-center">
-          <GameBoard board={state.board} lastSpawn={state.lastSpawn} />
+          <GameBoard
+            board={state.board}
+            lastSpawn={state.lastSpawn}
+            onMove={handleMove}
+          />
         </div>
 
-         <div className="mt-5 sm:mt-6 text-center">
+        <div className="mt-5 sm:mt-6 text-center">
           <ResultModal
             status={state.status}
             onRestart={() => dispatch({ type: "RESTART" })}
