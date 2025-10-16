@@ -10,8 +10,8 @@ Play online here 👉 [https://2k48game-subhajeet-sahu.netlify.app](https://2k48
 
 ## 🎯 Objective
 
-Combine tiles with the same number to create larger numbers.  
-Your goal is to reach the **2048 tile** (and beyond if you can)!
+- Combine tiles with the same number to merge them into a single tile.
+- Your goal is to create a 2048 tile by strategically combining numbers!.
 
 ---
 
@@ -30,7 +30,6 @@ Your goal is to reach the **2048 tile** (and beyond if you can)!
 
 ## 🏆 Winning
 - You **win** when a tile reaches **2048**.
-- You can continue playing after reaching 2048 to aim for higher scores!
 
 ---
 
