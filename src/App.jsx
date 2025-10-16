@@ -40,7 +40,7 @@ export default function App() {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center p-6 relative overflow-hidden"
+      className="min-h-screen flex items-center justify-center p-4 sm:p-6 relative overflow-hidden"
       style={{
         background: "radial-gradient(circle at top, #1b1f33 0%, #0e101a 100%)",
       }}
@@ -55,7 +55,7 @@ export default function App() {
 
       <div className="w-full max-w-3xl relative z-10 text-center text-white">
         <h1
-          className="text-5xl font-extrabold mb-6 tracking-wide"
+         className="text-3xl sm:text-5xl font-extrabold mb-4 sm:mb-6 tracking-wide"
           style={{
             color: "#06b6d4",
             textShadow:
@@ -66,7 +66,7 @@ export default function App() {
           2K48 <span style={{ color: "#a5b4fc" }}>Game</span>
         </h1>
 
-        <div className="flex items-center justify-between mb-5 px-2">
+        <div className="flex flex-col sm:flex-row items-center justify-between mb-4 sm:mb-5 gap-3 px-2">
           <Header
             onOpenHelp={() => setHelpOpen(true)}
             onReset={() => dispatch({ type: "RESTART" })}
@@ -74,11 +74,11 @@ export default function App() {
           <Scoreboard score={state.score} best={state.bestScore} />
         </div>
 
-        <div className="flex items-center justify-between mb-6 px-2 text-textSoft/90">
+         <div className="flex flex-col sm:flex-row items-center justify-between mb-5 sm:mb-6 px-2 text-textSoft/90 gap-2">
           <Controls
             onSizeChange={(s) => dispatch({ type: "SET_SIZE", size: s })}
           />
-          <div className="text-xs italic text-cyan-300/100">
+            <div className="text-xs sm:text-sm italic text-cyan-300/90 mt-1 sm:mt-0">
             Use ↑ ↓ ← → or WASD keys
           </div>
         </div>
@@ -87,7 +87,7 @@ export default function App() {
           <GameBoard board={state.board} lastSpawn={state.lastSpawn} />
         </div>
 
-        <div className="mt-6 text-center">
+         <div className="mt-5 sm:mt-6 text-center">
           <ResultModal
             status={state.status}
             onRestart={() => dispatch({ type: "RESTART" })}
