@@ -14,11 +14,25 @@ export default function App() {
   const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   useEffect(() => {
-    const touch =
-      "ontouchstart" in window ||
-      navigator.maxTouchPoints > 0 ||
-      navigator.msMaxTouchPoints > 0;
-    setIsTouchDevice(touch);
+    const checkTouch = () => {
+      try {
+    
+        if ("maxTouchPoints" in navigator && navigator.maxTouchPoints > 0)
+          return true;
+        if ("msMaxTouchPoints" in navigator && navigator.msMaxTouchPoints > 0)
+          return true;
+        if (
+          "ontouchstart" in window ||
+          (window.DocumentTouch && document instanceof window.DocumentTouch)
+        )
+          return true;
+        return false;
+      } catch {
+        return false;
+      }
+    };
+
+    setIsTouchDevice(checkTouch());
   }, []);
   const handleKey = useCallback(
     (e) => {
