@@ -1,9 +1,11 @@
 # 🎮 2K48 Game
  
+
+
+Public Git repo 👉 [https://github.com/Subhajeet-code/2048-Game](https://github.com/Subhajeet-code/2048-Game)
+
+
 Play online here 👉 [https://2k48game-subhajeet-sahu.netlify.app](https://2k48game-subhajeet-sahu.netlify.app)
-
-
-Public Git repo 👉 [https://github.com/Subhajeet-code/2048-Game]
 ---
 
 ## 🎯 Objective
