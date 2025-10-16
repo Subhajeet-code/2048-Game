@@ -1,12 +1,24 @@
 import React from "react";
+import { useSwipeable } from "react-swipeable";
 import Tile from "./Tile";
 
-export default function GameBoard({ board, lastSpawn }) {
+export default function GameBoard({ board, lastSpawn, onMove }) {
   const size = board.length;
   const gap = 8;
 
+  const handlers = useSwipeable({
+    onSwipedLeft: () => onMove("left"),
+    onSwipedRight: () => onMove("right"),
+    onSwipedUp: () => onMove("up"),
+    onSwipedDown: () => onMove("down"),
+    preventScrollOnSwipe: true,
+    trackTouch: true,
+    trackMouse: false,
+  });
+
   return (
     <div
+      {...handlers}
       className="rounded-3xl p-8 shadow-2xl backdrop-blur-xl flex flex-col items-center transition-all duration-500"
       style={{
         background:
