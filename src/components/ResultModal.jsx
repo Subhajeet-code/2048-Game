@@ -19,16 +19,13 @@ export default function ResultModal({ status, onRestart, onContinue, onClose }) 
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
-      {/* backdrop */}
       <div
         className="absolute inset-0 bg-black/50 backdrop-blur-sm"
         onClick={onClose}
         aria-hidden
       />
-      {/* confetti container */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="confetti-layer">
-          {/* a few confetti bits are pre-placed; CSS animates them */}
           <div className="confetti c1" />
           <div className="confetti c2" />
           <div className="confetti c3" />
@@ -39,8 +36,6 @@ export default function ResultModal({ status, onRestart, onContinue, onClose }) 
           <div className="confetti c8" />
         </div>
       </div>
-
-      {/* modal card */}
       <div
         className="relative w-full max-w-md mx-4 bg-white rounded-2xl shadow-2xl p-6 transform transition-all duration-400 ease-out scale-95 opacity-0 animate-result-in"
         role="dialog"
@@ -78,7 +73,6 @@ export default function ResultModal({ status, onRestart, onContinue, onClose }) 
               try {
                 const text = `I just ${isWin ? 'won' : 'played'} 2048! Can you beat my score?`;
                 navigator.share ? navigator.share({ text }) : (navigator.clipboard && navigator.clipboard.writeText(text));
-                // optional feedback
                 alert('Share text copied to clipboard!');
               } catch (e) {
                 console.warn(e);

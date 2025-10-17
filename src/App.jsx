@@ -16,7 +16,6 @@ export default function App() {
   useEffect(() => {
     const checkTouch = () => {
       try {
-    
         if ("maxTouchPoints" in navigator && navigator.maxTouchPoints > 0)
           return true;
         if ("msMaxTouchPoints" in navigator && navigator.msMaxTouchPoints > 0)
@@ -109,9 +108,6 @@ export default function App() {
           <Controls
             onSizeChange={(s) => dispatch({ type: "SET_SIZE", size: s })}
           />
-          {/* <div className="text-xs sm:text-sm italic text-cyan-300/90 mt-1 sm:mt-0">
-            Use ↑ ↓ ← → or WASD keys
-          </div> */}
           <div className="text-xs sm:text-sm italic text-cyan-300/90 mt-1 sm:mt-0">
             {isTouchDevice
               ? "Swipe in any direction to move tiles"

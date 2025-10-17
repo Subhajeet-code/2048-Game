@@ -23,7 +23,6 @@ function reducer(state, action) {
       const newBoard = addRandomTile(res.board);
       const emptyBefore = state.board.flat().filter(x=>x===0).length;
       const emptyAfter = newBoard.flat().filter(x=>x===0).length;
-      // find last spawned cell (difference)
       let lastSpawn = null;
       if (emptyAfter === emptyBefore - 1) {
         for (let r = 0; r < newBoard.length; r++) {
